@@ -1,5 +1,5 @@
 pipeline {
-    eviroment
+    environment
     {
         registry = "pranotikodam/demoimage"
         registryCredential ="dockerid"
