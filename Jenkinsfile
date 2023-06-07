@@ -1,21 +1,35 @@
 pipeline {
+    eviroment
+    {
+        registry = "pranotikodam/demoimage"
+        registryCredential ="dockerid"
+        dockerImage = ' '
+    }
     agent any
-
-    stages {
-        stage('Build') {
-            steps {
-              echo 'Build App'  
+    
+    stages
+    {
+        stage('Build Image')
+        {
+            steps
+            {
+                script
+                {
+                    dockerImage = docker.build registry + "$BUILD_NUMBER"
+                }
             }
         }
-
-        stage('Test') {
-            steps {
-               echo 'Test App' 
-            }
-        }
-         stage('Deploy') {
-            steps {
-               echo 'Deploy App' 
+        stage('Deploy Image')
+        {
+            steps
+            {
+                script
+                {
+                    docker.withRegistry('',registryCredential)
+                    {
+                        dockerImage.push()
+                    }
+                }
             }
         }
     }
