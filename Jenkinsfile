@@ -1,7 +1,7 @@
 pipeline {
     environment
     {
-        registry = "pranotikodam/demoimage"
+        registry = "pranoti15/demoimage"
         registryCredential ="dockerid"
         dockerImage = ' '
     }
